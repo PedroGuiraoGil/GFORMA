@@ -1,3 +1,1 @@
-Force GitHub Pages deploy
-
-# GFORMA
+Clean Pages redeploy
