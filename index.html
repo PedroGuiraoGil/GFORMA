@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExpertCourses | Crea tu Futuro a Medida</title>
+    <meta name="description"
+        content="Diseña tu propio curso personalizado. Elige temáticas, sesiones y modalidad con ExpertCourses.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+    <div class="glow-bg"></div>
+
+    <header>
+        <nav class="container">
+            <div class="logo">Expert<span>Courses</span></div>
+
+        </nav>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero">
+            <div class="container hero-content">
+                <h1 class="fade-in">Diseña el curso de tus <span>sueños</span></h1>
+                <p class="fade-in delay-1">Personaliza cada detalle: desde la temática hasta la ubicación. Sin límites,
+                    totalmente a tu medida.</p>
+                <div class="hero-btns fade-in delay-2">
+                    <a href="#creador" class="btn-primary">EMPEZAR</a>
+                </div>
+            </div>
+            <div class="hero-visual fade-in delay-3">
+                <div class="glass-card main-visual">
+                    <img src="assets/hero-bg.png" alt="Diseño Innovador">
+                </div>
+            </div>
+        </section>
+
+        <section id="creador" class="creator-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Configurador de Cursos</h2>
+                    <p>Sigue los pasos para recibir un presupuesto personalizado en tu email.</p>
+                </div>
+
+                <div class="wizard-container glass">
+                    <!-- Progress Bar -->
+                    <div class="progress-bar">
+                        <div class="step active" data-step="1">1</div>
+                        <div class="step" data-step="2">2</div>
+                        <div class="step" data-step="3">3</div>
+                        <div class="step" data-step="4">4</div>
+                    </div>
+
+                    <!-- Step 1: Temática -->
+                    <div class="wizard-step active" id="step1">
+                        <h3>¿De qué quieres aprender?</h3>
+                        <p>Selecciona una temática o escribe la tuya propia.</p>
+
+                        <div class="theme-grid" id="themeGrid">
+                            <button class="theme-chip" data-value="Inteligencia Artificial">IA & Machine
+                                Learning</button>
+                            <button class="theme-chip" data-value="Marketing Digital">Marketing Digital</button>
+                            <button class="theme-chip" data-value="Programación Web">Fullstack Dev</button>
+                            <button class="theme-chip" data-value="Diseño UX/UI">Diseño UX/UI</button>
+                            <button class="theme-chip" data-value="Liderazgo">Liderazgo</button>
+                            <button class="theme-chip" data-value="Data Science">Data Science</button>
+                            <button class="theme-chip" data-value="Ciberseguridad">Ciberseguridad</button>
+                        </div>
+
+                        <div class="custom-input-group">
+                            <label for="customTheme">¿No está en la lista? Escríbela aquí:</label>
+                            <input type="text" id="customTheme"
+                                placeholder="Ej: Cocina Molecular, Inversión en Cripto...">
+                        </div>
+
+                        <!-- Nuevo: Configuración de horas por habilidad -->
+                        <div id="selectedSkillsConfig" class="selected-skills-config hidden">
+                            <h4>Ajustar horas por temática:</h4>
+                            <div id="skillsHoursList"></div>
+                        </div>
+
+                        <div class="wizard-nav">
+                            <button class="btn-next" onclick="nextStep(1)">Siguiente <i
+                                    class="fas fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Sesiones y Horas -->
+                    <div class="wizard-step" id="step2">
+                        <h3>Estructura del Curso</h3>
+                        <p>Define la intensidad y duración de tu formación.</p>
+
+                        <div class="range-group">
+                            <div class="range-header">
+                                <label for="sessions">Número de Sesiones</label>
+                                <span id="sessionsVal">5</span>
+                            </div>
+                            <input type="range" id="sessions" min="1" max="30" value="5">
+                        </div>
+
+                        <div class="range-group">
+                            <div class="range-header">
+                                <label for="hours">Horas por Sesión</label>
+                                <span id="hoursVal">3</span>
+                            </div>
+                            <input type="range" id="hours" min="1" max="8" value="3">
+                        </div>
+
+                        <div class="summary-preview">
+                            Total estimado: <span id="totalHours">10</span> horas de formación.
+                        </div>
+
+                        <div class="wizard-nav">
+                            <button class="btn-prev" onclick="prevStep(2)">Atrás</button>
+                            <button class="btn-next" onclick="nextStep(2)">Siguiente</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Logística -->
+                    <div class="wizard-step" id="step3">
+                        <h3>¿Donde quieres realizarlo?</h3>
+                        <p>Elige el formato y la ubicación.</p>
+
+                        <div class="toggle-group">
+                            <button class="toggle-btn active" id="btnOnline"
+                                onclick="setModality('online')">Online</button>
+                            <button class="toggle-btn" id="btnPresencial"
+                                onclick="setModality('presencial')">Presencial</button>
+                        </div>
+
+                        <div id="locationSelector" class="hidden">
+                            <div class="input-group">
+                                <label for="province">Provincia (España)</label>
+                                <select id="province">
+                                    <option value="">Selecciona una capital...</option>
+                                    <option value="Albacete">Albacete</option>
+                                    <option value="Alicante">Alicante</option>
+                                    <option value="Almería">Almería</option>
+                                    <option value="Ávila">Ávila</option>
+                                    <option value="Badajoz">Badajoz</option>
+                                    <option value="Barcelona">Barcelona</option>
+                                    <option value="Bilbao">Bilbao</option>
+                                    <option value="Burgos">Burgos</option>
+                                    <option value="Cáceres">Cáceres</option>
+                                    <option value="Cádiz">Cádiz</option>
+                                    <option value="Castellón de la Plana">Castellón de la Plana</option>
+                                    <option value="Ceuta">Ceuta</option>
+                                    <option value="Ciudad Real">Ciudad Real</option>
+                                    <option value="Córdoba">Córdoba</option>
+                                    <option value="Cuenca">Cuenca</option>
+                                    <option value="Girona">Girona</option>
+                                    <option value="Granada">Granada</option>
+                                    <option value="Guadalajara">Guadalajara</option>
+                                    <option value="Huelva">Huelva</option>
+                                    <option value="Huesca">Huesca</option>
+                                    <option value="Jaén">Jaén</option>
+                                    <option value="Las Palmas de Gran Canaria">Las Palmas de Gran Canaria</option>
+                                    <option value="León">León</option>
+                                    <option value="Lleida">Lleida</option>
+                                    <option value="Logroño">Logroño</option>
+                                    <option value="Lugo">Lugo</option>
+                                    <option value="Madrid">Madrid</option>
+                                    <option value="Málaga">Málaga</option>
+                                    <option value="Melilla">Melilla</option>
+                                    <option value="Murcia">Murcia</option>
+                                    <option value="Ourense">Ourense</option>
+                                    <option value="Oviedo">Oviedo</option>
+                                    <option value="Palencia">Palencia</option>
+                                    <option value="Palma de Mallorca">Palma de Mallorca</option>
+                                    <option value="Pamplona">Pamplona</option>
+                                    <option value="Pontevedra">Pontevedra</option>
+                                    <option value="Salamanca">Salamanca</option>
+                                    <option value="San Sebastián">San Sebastián</option>
+                                    <option value="Santa Cruz de Tenerife">Santa Cruz de Tenerife</option>
+                                    <option value="Santander">Santander</option>
+                                    <option value="Segovia">Segovia</option>
+                                    <option value="Sevilla">Sevilla</option>
+                                    <option value="Soria">Soria</option>
+                                    <option value="Tarragona">Tarragona</option>
+                                    <option value="Teruel">Teruel</option>
+                                    <option value="Toledo">Toledo</option>
+                                    <option value="Valencia">Valencia</option>
+                                    <option value="Valladolid">Valladolid</option>
+                                    <option value="Vitoria-Gasteiz">Vitoria-Gasteiz</option>
+                                    <option value="Zamora">Zamora</option>
+                                    <option value="Zaragoza">Zaragoza</option>
+                                    <option value="Other">Otra / Especificar...</option>
+                                </select>
+                            </div>
+                            <div id="customLocationGroup" class="hidden">
+                                <input type="text" id="customLocation" placeholder="Especifica tu zona...">
+                            </div>
+                        </div>
+
+                        <div class="wizard-nav">
+                            <button class="btn-prev" onclick="prevStep(3)">Atrás</button>
+                            <button class="btn-next" onclick="nextStep(3)">Siguiente</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Finalizar -->
+                    <div class="wizard-step" id="step4">
+                        <h3>Casi listo</h3>
+                        <p>Revisa tu configuración y envíanos la solicitud.</p>
+
+                        <div class="final-summary" id="finalSummary">
+                            <!-- JS will populate this -->
+                        </div>
+
+                        <div class="input-group">
+                            <label for="email">Tu Correo Electrónico</label>
+                            <input type="email" id="email" placeholder="email@ejemplo.com" required>
+                        </div>
+
+                        <div class="wizard-nav">
+                            <button class="btn-prev" onclick="prevStep(4)">Atrás</button>
+                            <button class="btn-primary btn-submit" onclick="submitCourse()">Enviar Solicitud</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 ExpertCourses. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="habilidades.js"></script>
+    <script src="formadores.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
